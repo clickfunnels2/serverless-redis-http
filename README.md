@@ -47,7 +47,7 @@ docker run \
     -e SRH_MODE=env \
     -e SRH_TOKEN=your_token_here \
     -e SRH_CONNECTION_STRING="redis://your_server_here:6379" \
-    hiett/serverless-redis-http:latest
+    ghcr.io/clickfunnels2/serverless-redis-http:latest
 ```
 
 ## Via Docker Compose
@@ -62,7 +62,7 @@ services:
   serverless-redis-http:
     ports:
       - '8079:80'
-    image: hiett/serverless-redis-http:latest
+    image: ghcr.io/clickfunnels2/serverless-redis-http:latest
     environment:
       SRH_MODE: env
       SRH_TOKEN: example_token
@@ -91,7 +91,7 @@ jobs:
       redis:
         image: redis/redis-stack-server:6.2.6-v6 # 6.2 is the Upstash compatible Redis version
       srh:
-        image: hiett/serverless-redis-http:latest
+        image: ghcr.io/clickfunnels2/serverless-redis-http:latest
         env:
           SRH_MODE: env # We are using env mode because we are only connecting to one server.
           SRH_TOKEN: ${{ env.SRH_TOKEN }}
@@ -133,7 +133,7 @@ You can provide as many entries to the base object as you wish, and configure th
 
 Once you have created this, mount it to the docker container to the `/app/srh-config/tokens.json` file. Here is an example docker command:
 
-`docker run -it -d -p 8079:80 --name srh --mount type=bind,source=$(pwd)/tokens.json,target=/app/srh-config/tokens.json hiett/serverless-redis-http:latest`
+`docker run -it -d -p 8079:80 --name srh --mount type=bind,source=$(pwd)/tokens.json,target=/app/srh-config/tokens.json ghcr.io/clickfunnels2/serverless-redis-http:latest`
 
 ## Environment Variables
 

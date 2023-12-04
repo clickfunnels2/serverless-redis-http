@@ -1,10 +1,9 @@
 defmodule Srh do
   use Application
 
-  @port Application.fetch_env!(:srh, :port)
-
   def start(_type, _args) do
-    IO.puts("Using port #{@port}")
+    port = Application.fetch_env!(:srh, :port) 
+    IO.puts("Using port #{port}")
 
     children = [
       Srh.Auth.TokenResolver,
@@ -14,7 +13,7 @@ defmodule Srh do
         scheme: :http,
         plug: Srh.Http.BaseRouter,
         options: [
-          port: @port
+          port: port
         ]
       }
     ]
